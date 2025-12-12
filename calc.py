@@ -5,8 +5,10 @@ def calc(name,kg,mg_per_kg,concetration_pct):
   paste_mg=dose_in_mg/concetration
   paste_grams=paste_mg/1000
   return locals()
-
-
+def calc_iver(name,kg):
+  return calc(name,kg,.2,1.78)
+def calc_guard(name,kg):
+  return calc(name,kg,9,10)
 
 def make_row(tds):
   return  f"<tr>{'\n'.join(tds)}</tr>"
@@ -65,17 +67,17 @@ def make_table(data,title):
 def top_calc():
   ans=[]
   ans.append(make_table([
-    calc('einat/yigal/timber',100,.2,1.78),
-    calc('theadore',23,.2,1.78),
-    calc('audrey',50,.2,1.78),
-    calc('cat',3,.2,1.78)
+    calc_iver('einat/yigal/timber',100),
+    calc_iver('theadore',23),
+    calc_iver('audrey',50),
+    calc_iver('cat',3)
   ],'ivermectin'))
 
   ans.append(make_table([
-    calc('einat/yigal/timber',100,9,10),
-    calc('theadore',23,9,10),
-    calc('audrey',50,9,10),
-    calc('cat',3,9,10)
+    calc_guard('einat/yigal/timber',100),
+    calc_guard('theadore',23),
+    calc_guard('audrey',50),
+    calc_guard('cat',3)
   ],'safe gurard'))  
   return '\n'.join(ans)
 
