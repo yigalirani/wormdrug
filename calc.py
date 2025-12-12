@@ -6,10 +6,12 @@ def calc(name,lb,mg_per_kg,concetration_pct):
   paste_mg=dose_in_mg/concetration
   paste_grams=paste_mg/1000
   return locals()
-def calc_iver(name,kg):
-  return calc(name,kg,.2,1.78)
-def calc_guard(name,kg):
-  return calc(name,kg,9,10)
+def calc_iver(vars):
+  name,lb=vars
+  return calc(name,lb,.2,1.78)
+def calc_guard(vars):
+  name,lb=vars
+  return calc(name,lb,9,10)
 
 def make_row(tds):
   return  f"<tr>{'\n'.join(tds)}</tr>"
@@ -59,7 +61,8 @@ def make_header(cols):
     ans.append(f"<th>{col.replace('_', ' ')}</th>")
   return make_row(ans)
 
-def make_table(data,title):
+def make_table(data1,func,title):
+  data=list(map(func,data1))
   cols=data[0].keys()
   header=make_header(cols)
   rows=make_rows(data,cols)
@@ -67,21 +70,16 @@ def make_table(data,title):
 
 def top_calc():
   ans=[]
-  ans.append(make_table([
-    calc_iver('einat/yigal/timber',230),
-    calc_iver('theadore',23),
-    calc_iver('audrey',100),
-    calc_iver('cat1',9),
-    calc_iver('cat2',7)
-  ],'ivermectin'))
+  patients=[
+    ('einat/yigal/timber',230),
+    ('theadore',50),
+    ('audrey',100),
+    ('big cat',9),
+    ('small cat',7)   
+  ]  
+  ans.append(make_table(patients,calc_iver,'ivermectin'))
+  ans.append(make_table(patients,calc_guard,'safe guard'))
 
-  ans.append(make_table([
-    calc_guard('einat/yigal/timber',230),
-    calc_guard('theadore',50),
-    calc_guard('audrey',100),
-    calc_guard('cat1',7),
-    calc_guard('cat',9)
- ],'safe gurard'))  
   return '\n'.join(ans)
 
 
