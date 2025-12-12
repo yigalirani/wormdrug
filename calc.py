@@ -1,5 +1,6 @@
 
-def calc(name,kg,mg_per_kg,concetration_pct):
+def calc(name,lb,mg_per_kg,concetration_pct):
+  kg=lb/2.2
   dose_in_mg=mg_per_kg*kg
   concetration=concetration_pct/100
   paste_mg=dose_in_mg/concetration
@@ -67,25 +68,22 @@ def make_table(data,title):
 def top_calc():
   ans=[]
   ans.append(make_table([
-    calc_iver('einat/yigal/timber',100),
+    calc_iver('einat/yigal/timber',230),
     calc_iver('theadore',23),
-    calc_iver('audrey',50),
-    calc_iver('cat',3)
+    calc_iver('audrey',100),
+    calc_iver('cat1',9),
+    calc_iver('cat2',7)
   ],'ivermectin'))
 
   ans.append(make_table([
-    calc_guard('einat/yigal/timber',100),
-    calc_guard('theadore',23),
-    calc_guard('audrey',50),
-    calc_guard('cat',3)
-  ],'safe gurard'))  
+    calc_guard('einat/yigal/timber',230),
+    calc_guard('theadore',50),
+    calc_guard('audrey',100),
+    calc_guard('cat1',7),
+    calc_guard('cat',9)
+ ],'safe gurard'))  
   return '\n'.join(ans)
 
-
-
-
-
-      
 
 with open('template.html', 'r', encoding='utf-8') as file:
     template = file.read()
